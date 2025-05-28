@@ -3,13 +3,16 @@
 include "partials/header.php";
 include "partials/notifications.php";
 include "config/Database.php";
+include "classes/Task.php";
 
 $database = new Database();
 $db = $database->connect();
+$todo = new Task($db);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if( isset( $_POST['add_task'] )) {
-
+    if (isset($_POST['add_task'])) {
+        $todo->task = $_POST['task'];
+        $todo->create();
     }
 }
 ?>
