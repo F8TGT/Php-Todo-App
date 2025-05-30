@@ -15,6 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $todo->create();
     }
 }
+
+//  Fetch Tasks
+$tasks = $todo->read();
 ?>
 
 <!-- Main Content Container -->
@@ -29,45 +32,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- Display Tasks -->
     <ul>
-        <li class="completed">
-            <span class="completed">Sample Task</span>
-            <div>
-                <!-- Complete Task -->
-                <form method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="1">
-                    <button class="complete" type="submit" name="complete_task">Complete</button>
-                </form>
+        <?php
+        while ($task = $tasks->fetch_assoc()): ?>
+            <li class="completed">
+                <span class="completed">Sample Task</span>
+                <div>
+                    <!-- Complete Task -->
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="1">
+                        <button class="complete" type="submit" name="complete_task">Complete</button>
+                    </form>
 
-                <!-- Undo Completed Task -->
-                <form method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="1">
-                    <button class="undo" type="submit" name="undo_complete_task">Undo</button>
-                </form>
+                    <!-- Undo Completed Task -->
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="1">
+                        <button class="undo" type="submit" name="undo_complete_task">Undo</button>
+                    </form>
 
-                <!-- Delete Task -->
-                <form method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="1">
-                    <button class="delete" type="submit" name="delete_task">Delete</button>
-                </form>
-            </div>
-        </li>
+                    <!-- Delete Task -->
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="1">
+                        <button class="delete" type="submit" name="delete_task">Delete</button>
+                    </form>
+                </div>
+            </li>
 
-        <li>
-            <span>Another Task</span>
-            <div>
-                <!-- Complete Task -->
-                <form method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="2">
-                    <button class="complete" type="submit" name="complete_task">Complete</button>
-                </form>
+            <li>
+                <span>Another Task</span>
+                <div>
+                    <!-- Complete Task -->
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="2">
+                        <button class="complete" type="submit" name="complete_task">Complete</button>
+                    </form>
 
-                <!-- Delete Task -->
-                <form method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="2">
-                    <button class="delete" type="submit" name="delete_task">Delete</button>
-                </form>
-            </div>
-        </li>
+                    <!-- Delete Task -->
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="2">
+                        <button class="delete" type="submit" name="delete_task">Delete</button>
+                    </form>
+                </div>
+            </li>
+        <?php
+        endwhile; ?>
     </ul>
 </div>
 
