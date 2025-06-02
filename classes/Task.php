@@ -26,4 +26,12 @@ class Task
         $query = "SELECT * FROM ".$this->table." ORDER BY created_at DESC";
         return $this->conn->query($query);
     }
+
+    public function complete($id)
+    {
+        $query = "UPDATE ".$this->table." SET is_completed = 1 WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
 }
