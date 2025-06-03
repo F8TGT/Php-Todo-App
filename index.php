@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $todo->create();
     } elseif (isset($_POST['complete_task'])) {
         $todo->complete($_POST['id']);
+    } elseif (isset($_POST['undo_complete_task'])) {
+        $todo->undoComplete($_POST['id']);
     }
 }
 
@@ -48,14 +50,15 @@ $tasks = $todo->read();
                         <!-- Complete Task -->
                         <form method="POST" style="display:inline;">
                             <input type="hidden" name="id" value="<?php
-                            echo $task['id']; ?>"
+                            echo $task['id']; ?>">
                             <button class="complete" type="submit" name="complete_task">Complete</button>
                         </form>
                     <?php
                     else: ?>
                         <!-- Undo Completed Task -->
                         <form method="POST" style="display:inline;">
-                            <input type="hidden" name="id" value="1">
+                            <input type="hidden" name="id" value="<?php
+                            echo $task['id']; ?>">
                             <button class="undo" type="submit" name="undo_complete_task">Undo</button>
                         </form>
                     <?php
@@ -63,23 +66,6 @@ $tasks = $todo->read();
                     <!-- Delete Task -->
                     <form method="POST" style="display:inline;">
                         <input type="hidden" name="id" value="1">
-                        <button class="delete" type="submit" name="delete_task">Delete</button>
-                    </form>
-                </div>
-            </li>
-
-            <li>
-                <span>Another Task</span>
-                <div>
-                    <!-- Complete Task -->
-                    <form method="POST" style="display:inline;">
-                        <input type="hidden" name="id" value="2">
-                        <button class="complete" type="submit" name="complete_task">Complete</button>
-                    </form>
-
-                    <!-- Delete Task -->
-                    <form method="POST" style="display:inline;">
-                        <input type="hidden" name="id" value="2">
                         <button class="delete" type="submit" name="delete_task">Delete</button>
                     </form>
                 </div>
