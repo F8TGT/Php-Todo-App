@@ -89,7 +89,7 @@ endif; ?>
                     <?php
                     endif; ?>
                     <!-- Delete Task -->
-                    <form method="POST" style="display:inline;">
+                    <form onsubmit="return confirmDelete()" method="POST" style="display:inline;">
                         <input type="hidden" name="id" value="<?php
                         echo $task['id']; ?>">
                         <button class="delete" type="submit" name="delete_task">Delete</button>
@@ -100,6 +100,12 @@ endif; ?>
         endwhile; ?>
     </ul>
 </div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete?")
+    }
+</script>
 
 <?php
 include "partials/footer.php";
