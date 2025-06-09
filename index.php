@@ -37,7 +37,8 @@ $tasks = $todo->read();
 <!-- Notification Container -->
 <?php
 if (isset($_SESSION['message'])): ?>
-    <div class="notification-container">
+    <div class="notification-container <?php
+    echo isset($_SESSION['message']) ? "show" : '' ?>">
         <div class="notification <?php
         echo $_SESSION['msg_type']; ?>">
             <?php
